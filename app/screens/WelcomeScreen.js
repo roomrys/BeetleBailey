@@ -1,13 +1,15 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, TextInput, View } from 'react-native';
+import { ImageBackground, StyleSheet, TextInput, View, SafeAreaView, Pressable, Text } from 'react-native';
 
 import backgroundImg from "../assets/beetlebailey-comic.png";
-import {COLORS} from '../assets/colors.js'
+import {COLORS} from '../assets/colors.js';
+import {DIMENS} from '../assets/dimensions.js';
 
 // const image = { backgroundImg };
 
 function WelcomeScreen(props) {
     return (
+        <SafeAreaView style={styles.container}>
         <View style={styles.container}>
             <ImageBackground 
             source={backgroundImg}
@@ -18,12 +20,21 @@ function WelcomeScreen(props) {
                     // onChangeText={onChangeNumber}
                     // value={number}
                     maxLength={40}
-                    placeholder="max 40char"
+                    placeholder="Insert text to display, then hit 'Display' button"
                     placeholderTextColor="gray"
                     selectionColor={COLORS.bbred}
                 />
+            <Pressable
+                style={styles.button}
+                // onPress={onPress}
+            >
+                <Text style={styles.text}>
+                    Display
+                </Text>
+            </Pressable>
             </ImageBackground>
         </View>
+        </SafeAreaView>
     );
 }
 
@@ -37,13 +48,21 @@ const styles = StyleSheet.create({
         resizeMode: "contain"
     },
     input: {
+        ...DIMENS.input,
         backgroundColor: COLORS.black,
         borderColor: COLORS.bbgreen,
         color: COLORS.bbyellow,
-        height: 40,
-        margin: 12,
-        borderWidth: 5,
-        padding: 10,
+    },
+    button: {
+        ...DIMENS.button,
+        backgroundColor: COLORS.bbred,
+        alignItems: 'center',
+        justifyContent: 'center'
+
+    },
+    text: {
+        ...DIMENS.text,
+        color: COLORS.white
     }
 })
 
