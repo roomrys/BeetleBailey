@@ -1,6 +1,10 @@
 import numpy as np
 from PIL import Image, ImageOps
 
+# class SPI_Command:
+#     'Common base class for all SPI commands'
+#     def __init__(self, add)
+
 
 def find_start_end(data, axis):
     """Finds the indices of the first and last non-zero value of array along specified axis.
@@ -65,12 +69,23 @@ def draw_block_lines(data, divisor):
     data_copy[:, ::pixels_per_block] = 100
     return data_copy
 
+def get_digits_dict(block_mat):
+    digits = {}
+    bmat = block_mat.copy()
+    ones_idx = np.where(bmat > 0)
+    ones_idx_unique_row = np.unique(ones_idx[0])
+    prev_idx = 0
+    for col in ones_idx_unique_row:
+        last_idx = (np.where(ones_idx[0] == col)[0])[-1] + 1
+        digits[col] = ones_idx[1][prev_idx:last_idx]
+        prev_idx = last_idx
+    return digits.copy()
 
 divisor = 8
 limit = 0.7
 
 # 1. read in image as binary array
-base_name = 'B'
+base_name = 'percent'
 image = ImageOps.grayscale(Image.open('./assets/' + base_name + '.png'))
 data = np.asarray(image)
 
@@ -89,7 +104,6 @@ data = pad_square(data, divisor)
 data = ensure_size_correct(data, divisor)
 print(np.shape(data))
 image_square = Image.fromarray(draw_block_lines(data, divisor)).save('./assets/'+ base_name +'_square.png')
-# image_square.show()
 
 # 4. split image into 8 x 8 with blocks
 pixels_image = np.shape(data)[0]
@@ -109,8 +123,12 @@ for row_num in range(0, divisor):
         zero_or_one = classify_binary_block(block, limit)
         block_mat_full[row_num*pixels_per_block:(row_num+1)*pixels_per_block, col_num*pixels_per_block:(col_num+1)*pixels_per_block] = zero_or_one
         block_mat[row_num, col_num] = zero_or_one
-(Image.fromarray(block_mat*255)).show()
+# (Image.fromarray(block_mat*255)).show()
 image_block = Image.fromarray(block_mat_full*255).save('./assets/' + base_name + '_block.png')
 # block_mat = draw_block_lines(block_mat, divisor)
 
 # 6. export key-value pair of letter-image
+digits = get_digits_dict(block_mat)
+print(digits)
+
+# 7. convert digits to spi commands
