@@ -1,0 +1,41 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "terminal.integrated.profiles.windows": {
+            "PowerShell": {
+                "source": "PowerShell",
+                "icon": "terminal-powershell"
+            },
+            "Command Prompt": {
+                "path": [
+                    "${env:windir}\\Sysnative\\cmd.exe",
+                    "${env:windir}\\System32\\cmd.exe"
+                ],
+                "args": [
+                    "/k",
+                    "%userprofile%\\esp\\esp-idf\\export.bat"
+                ],
+                "icon": "terminal-cmd"
+            },
+            "Git Bash": {
+                "source": "Git Bash"
+            }
+        },
+        "terminal.integrated.defaultProfile.windows": "Command Prompt",
+        "files.associations": {
+            "*.ejs": "html",
+            "spi_master.h": "c",
+            "iosfwd": "c",
+            "regex": "c",
+            "xlocale": "c",
+            "xstring": "c",
+            "gpio_struct.h": "c",
+            "stdio.h": "c",
+            "task.h": "c"
+        }
+    }
+}
