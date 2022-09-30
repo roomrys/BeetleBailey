@@ -1,0 +1,48 @@
+:root {
+    --ff-sans: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
+    --top-bar-hieght: 50px;
+    --title-height: 60px;
+    --logo-width: 200px;
+}
+
+body {
+    margin: 0;
+    background-color: rgba(255, 252, 78, 0.781);
+
+    /*Center background image.*/
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../images/beetlebailey-background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
+    background-position: center;
+
+    /*Center everything else.*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style input box and button.*/
+.form {
+    height: 50px;
+
+}
+
+input {
+    width: 250px;
+    max-width: 70vw;
+    padding: 10px 10px;
+}
+
+button {
+    width: 50px;
+    max-width: 20vw;
+
+    background-image: url("../images/up-arrow-svgrepo-com.svg");
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: contain;
+    background-position: center;
+}
